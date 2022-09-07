@@ -6,35 +6,37 @@ public class MovableRectangle implements Movable {
 
     public MovableRectangle(int x1, int x2, int y1, int y2, int xSpeed, int ySpeed)
     {
-        this.topLeft.x = x1;
-        this.topLeft.y = y1;
-        this.bottomRight.x = x2;
-        this.bottomRight.y = y2;
-        this.topLeft.xSpeed = xSpeed;
-        this.bottomRight.xSpeed = xSpeed;
-        this.topLeft.ySpeed = ySpeed;
-        this.bottomRight.ySpeed = ySpeed;
-
+        topLeft = new MovablePoint(x1, y1, xSpeed, ySpeed);
+        bottomRight = new MovablePoint(x2, y2, xSpeed, ySpeed); this.topLeft.x = x1;
+    }
+    public boolean speedControl()
+    {
+        return topLeft.xSpeed == bottomRight.xSpeed && topLeft.ySpeed == bottomRight.ySpeed;
     }
     public void moveUp()
     {
-        this.topLeft.x = this.topLeft.x + this.topLeft.xSpeed;
-        this.bottomRight.x = this.bottomRight.x + this.bottomRight.xSpeed;
+        if(speedControl()) {
+            topLeft.moveUp();
+            bottomRight.moveUp();
+        }
     }
-    public void moveDown()
-    {
-        this.topLeft.x = this.topLeft.x - this.topLeft.xSpeed;
-        this.bottomRight.x = this.bottomRight.x - this.bottomRight.xSpeed;
+    public void moveDown() {
+        if (speedControl()) {
+            topLeft.moveDown();
+            bottomRight.moveDown();
+        }
     }
-    public void moveLeft()
-    {
-        this.topLeft.y = this.topLeft.y - this.topLeft.ySpeed;
-        this.bottomRight.y = this.bottomRight.y - this.bottomRight.ySpeed;
+    public void moveLeft() {
+        if (speedControl()) {
+            topLeft.moveLeft();
+            bottomRight.moveLeft();
+        }
     }
-    public void moveRight()
-    {
-        this.topLeft.x = this.topLeft.x + this.topLeft.xSpeed;
-        this.bottomRight.x = this.bottomRight.x + this.bottomRight.xSpeed;
+    public void moveRight() {
+        if (speedControl()) {
+            topLeft.moveRight();
+            bottomRight.moveRight();
+        }
     }
     @Override
     public String toString(){
